@@ -16,6 +16,7 @@
 
   <modules>
     <module>eureka-service</module>
+    <module>product-service</module>
   </modules>
 
   <properties>
