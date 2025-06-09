@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: crud-client
+
+server:
+  port: 8020
+
+ribbon:
+  eureka:
+    enable: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    initial-instance-info-replication-interval-seconds: 10
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://localhost:8888/eureka

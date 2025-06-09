@@ -1,11 +1,11 @@
-package com.example.product_service;
+package com.example.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
-@SpringBootApplication(scanBasePackages = { "com.example.product_service.controller" })
-@MapperScan(basePackages = "com.example.product_service.mapper")
+@SpringBootApplication
+@EnableEurekaServer
 
 public class EurekaServiceApplication {
 

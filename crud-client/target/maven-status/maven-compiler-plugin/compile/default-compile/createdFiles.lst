@@ -1,0 +1,4 @@
+com\example\crud\client\StudentServiceClient.class
+com\example\crud\model\Student.class
+com\example\crud\controller\StudentServiceController.class
+com\example\crud\CRUDClientApplication.class

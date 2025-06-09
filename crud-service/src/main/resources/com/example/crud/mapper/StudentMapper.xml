@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.crud.mapper.StudentMapper">
+
+    <resultMap id="StudentResultMap" type="com.example.crud.model.Student">
+        <id property="studentId" column="student_id" />
+        <result property="name" column="name" />
+        <result property="gender" column="gender" />
+        <result property="birthDate" column="birth_date" />
+        <result property="major" column="major" />
+        <result property="gradeLevel" column="grade_level" />
+        <result property="email" column="email" />
+        <result property="phoneNumber" column="phone_number" />
+        <result property="address" column="address" />
+        <result property="nationality" column="nationality" />
+        <result property="enrollmentYear" column="enrollment_year" />
+        <result property="createdAt" column="created_at" />
+        <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <select id="getAllStudents" resultMap="StudentResultMap"> SELECT student_id, name, gender,
+        birth_date, major, grade_level, email, phone_number, address, nationality, enrollment_year,
+        created_at, updated_at FROM student </select>
+
+    <select id="getStudentById" parameterType="int" resultMap="StudentResultMap"> SELECT * FROM
+        student WHERE student_id = #{studentId} </select>
+
+    <insert id="insertStudent" parameterType="com.example.crud.model.Student"> INSERT INTO student
+        (student_id, name, gender, birth_date, major, grade_level, email, phone_number, address,
+        nationality, enrollment_year, created_at, updated_at) VALUES (#{studentId}, #{name},
+        #{gender}, #{birthDate}, #{major}, #{gradeLevel}, #{email}, #{phoneNumber}, #{address},
+        #{nationality}, #{enrollmentYear}, NOW(), NOW()) </insert>
+
+    <update id="updateStudent" parameterType="com.example.crud.model.Student"> UPDATE student <set>
+            <if test="name != null">name=#{name},</if>
+        <if test="gender != null">gender=#{gender},</if>
+        <if
+                test="birthDate != null">birth_date=#{birthDate},</if>
+        <if test="major != null">
+        major=#{major},</if>
+        <if test="gradeLevel != null">grade_level=#{gradeLevel},</if>
+        <if
+                test="email != null">email=#{email},</if>
+        <if test="phoneNumber != null">
+        phone_number=#{phoneNumber},</if>
+        <if test="address != null">address=#{address},</if>
+        <if
+                test="nationality != null">nationality=#{nationality},</if>
+        <if
+                test="enrollmentYear != null">enrollment_year=#{enrollmentYear},</if>
+        updated_at=NOW() </set> WHERE student_id=#{studentId} </update>
+
+
+    <delete id="deleteStudent" parameterType="int"> DELETE FROM student WHERE
+        student_id=#{studentId} </delete>
+
+</mapper>
