@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "EurekaServiceApplication",
+            "request": "launch",
+            "mainClass": "com.example.eureka.EurekaServiceApplication",
+            "projectName": "com.example-eureka-service"
+        },
+        {
+            "type": "java",
+            "name": "CRUDClientApplication",
+            "request": "launch",
+            "mainClass": "com.example.crud.CRUDClientApplication",
+            "projectName": "crud-client"
+        },
+        {
+            "type": "java",
+            "name": "CRUDServiceApplication - Port 8010",
+            "request": "launch",
+            "mainClass": "com.example.crud.CRUDServiceApplication",
+            "projectName": "crud-service",
+            "vmArgs": "-Dserver.port=8010"
+        },
+        {
+            "type": "java",
+            "name": "CRUDServiceApplication - Port 8011",
+            "request": "launch",
+            "mainClass": "com.example.crud.CRUDServiceApplication",
+            "projectName": "crud-service",
+            "vmArgs": "-Dserver.port=8011"
+        }
+    ]
+}

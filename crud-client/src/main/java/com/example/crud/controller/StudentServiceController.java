@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.crud.client.StudentServiceClient;
+import com.example.crud.client.CRUDServiceClient;
 import com.example.crud.model.Student;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StudentServiceController {
 
-    private final StudentServiceClient studentServiceClient;
+    private final CRUDServiceClient studentServiceClient;
 
     @GetMapping
     public List<Student> getAllStudents() {

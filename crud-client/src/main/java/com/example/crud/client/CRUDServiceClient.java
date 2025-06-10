@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.crud.model.Student;
 
-@FeignClient(name = "crud-service") // 这里是 crud-service 注册到 Eureka 的应用名
-public interface StudentServiceClient {
+@FeignClient(name = "crud-service")
+public interface CRUDServiceClient {
 
     @GetMapping("/students")
     List<Student> getAllStudents();
@@ -29,4 +29,10 @@ public interface StudentServiceClient {
 
     @DeleteMapping("/students/{id}")
     void deleteStudent(@PathVariable("id") int studentId);
+
+    @GetMapping("/port")
+    String getPort();
+
+    @GetMapping("/fallback")
+    String fallback();
 }
