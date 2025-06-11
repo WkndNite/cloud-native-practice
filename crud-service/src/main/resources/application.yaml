@@ -2,7 +2,7 @@ spring:
   application:
     name: crud-service
   datasource:
-    url: jdbc:mysql://localhost:3306/cloud_student_ms?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/cloud_student_ms?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

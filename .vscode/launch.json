@@ -36,6 +36,20 @@
             "mainClass": "com.example.crud.CRUDServiceApplication",
             "projectName": "crud-service",
             "vmArgs": "-Dserver.port=8011"
+        },
+        {
+            "type": "java",
+            "name": "Gateway",
+            "request": "launch",
+            "mainClass": "com.example.gateway.GatewayServiceApplication",
+            "projectName": "gateway",
+        },
+        {
+            "type": "java",
+            "name": "ConfigServerApplication",
+            "request": "launch",
+            "mainClass": "com.example.ConfigServerApplication",
+            "projectName": "config"
         }
     ]
 }
