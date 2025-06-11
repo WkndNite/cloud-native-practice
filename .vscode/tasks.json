@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "maven-crud-client",
+            "type": "shell",
+            "command": "mvn clean compile",
+            "options": {
+                "cwd": "${workspaceFolder}/crud-client"
+            }
+        },
+        {
+            "label": "maven-crud-service",
+            "type": "shell",
+            "command": "mvn clean compile",
+            "options": {
+                "cwd": "${workspaceFolder}/crud-service"
+            }
+        },
+        {
+            "label": "maven-eureka-service",
+            "type": "shell",
+            "command": "mvn clean compile",
+            "options": {
+                "cwd": "${workspaceFolder}/eureka-service"
+            }
+        },
+        {
+            "label": "maven-gateway",
+            "type": "shell",
+            "command": "mvn clean compile",
+            "options": {
+                "cwd": "${workspaceFolder}/gateway-service"
+            }
+        },
+        {
+            "label": "maven-config",
+            "type": "shell",
+            "command": "mvn clean compile",
+            "options": {
+                "cwd": "${workspaceFolder}/config-service"
+            }
+        }
+    ]
+}
