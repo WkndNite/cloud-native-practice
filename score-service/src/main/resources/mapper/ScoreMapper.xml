@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.score.mapper.ScoreMapper">
+    
+    <resultMap id="scoreMap" type="com.example.score.model.Score">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="courseName" column="course_name"/>
+        <result property="score" column="score"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="scoreMap">
+        SELECT * FROM score
+    </select>
+
+    <select id="findById" resultMap="scoreMap">
+        SELECT * FROM score WHERE id = #{id}
+    </select>
+
+    <select id="findByStudentId" resultMap="scoreMap">
+        SELECT * FROM score WHERE student_id = #{studentId}
+    </select>
+
+    <select id="findByCourseName" resultMap="scoreMap">
+        SELECT * FROM score WHERE course_name = #{courseName}
+    </select>
+
+    <insert id="insert" parameterType="com.example.score.model.Score" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO score (student_id, course_name, score, created_at, updated_at)
+        VALUES (#{studentId}, #{courseName}, #{score}, NOW(), NOW())
+    </insert>
+
+    <update id="update" parameterType="com.example.score.model.Score">
+        UPDATE score
+        SET student_id = #{studentId},
+            course_name = #{courseName},
+            score = #{score},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM score WHERE id = #{id}
+    </delete>
+
+    <select id="getAverageScoreByStudentId" resultType="java.lang.Double">
+        SELECT AVG(score) FROM score WHERE student_id = #{studentId}
+    </select>
+
+    <select id="getAverageScoreByCourseName" resultType="java.lang.Double">
+        SELECT AVG(score) FROM score WHERE course_name = #{courseName}
+    </select>
+</mapper> 
