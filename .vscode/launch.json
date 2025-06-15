@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "EurekaServiceApplication",
+            "request": "launch",
+            "mainClass": "com.example.eureka.EurekaServiceApplication",
+            "projectName": "eureka-service"
+        },
+        {
+            "type": "java",
             "name": "CRUDClientApplication",
             "request": "launch",
             "mainClass": "com.example.crud.CRUDClientApplication",

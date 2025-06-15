@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        # 其他路由配置...
+
+        # 统计分析服务路由
+        - id: stats-service
+          uri: lb://stats-service
+          predicates:
+            - Path=/api/stats/**
+          filters:
+            - StripPrefix=1
