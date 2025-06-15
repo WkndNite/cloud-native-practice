@@ -12,10 +12,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/stats")
-@RequiredArgsConstructor
 public class StatsController {
 
     private final StatsService statsService;
+
+    public StatsController(StatsService statsService) {
+        this.statsService = statsService;
+    }
 
     @GetMapping("/grade-distribution")
     public List<GradeDistribution> getGradeDistribution() {

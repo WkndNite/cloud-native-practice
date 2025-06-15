@@ -15,6 +15,8 @@
     <module>gateway-service</module>
     <module>config-service</module>
     <module>stats-service</module>  <!-- 新增统计分析微服务 -->
+    <module>stats-client</module>  <!-- 新增统计分析微服务模块 -->
+
 </modules>
          <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

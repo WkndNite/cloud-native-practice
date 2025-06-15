@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "StatsServiceApplication",
+            "request": "launch",
+            "mainClass": "com.example.stats.StatsServiceApplication",
+            "projectName": "stats-service"
+        },
+        {
+            "type": "java",
             "name": "EurekaServiceApplication",
             "request": "launch",
             "mainClass": "com.example.eureka.EurekaServiceApplication",

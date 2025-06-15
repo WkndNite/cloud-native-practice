@@ -6,10 +6,10 @@
     <select id="getGradeDistribution" resultType="com.example.stats.model.GradeDistribution">
         SELECT
             CASE
-                WHEN grade < 60 THEN '不及格(0-59)'
-                WHEN grade >= 60 AND grade < 70 THEN '及格(60-69)'
-                WHEN grade >= 70 AND grade < 80 THEN '中等(70-79)'
-                WHEN grade >= 80 AND grade < 90 THEN '良好(80-89)'
+                WHEN grade &lt; 60 THEN '不及格(0-59)'
+                WHEN grade &gt;= 60 AND grade &lt; 70 THEN '及格(60-69)'
+                WHEN grade &gt;= 70 AND grade &lt; 80 THEN '中等(70-79)'
+                WHEN grade &gt;= 80 AND grade &lt; 90 THEN '良好(80-89)'
                 ELSE '优秀(90-100)'
             END AS gradeRange,
             COUNT(*) AS count,
@@ -32,10 +32,10 @@
     <select id="getCourseGradeDistribution" parameterType="int" resultType="com.example.stats.model.GradeDistribution">
         SELECT
             CASE
-                WHEN grade < 60 THEN '不及格(0-59)'
-                WHEN grade >= 60 AND grade < 70 THEN '及格(60-69)'
-                WHEN grade >= 70 AND grade < 80 THEN '中等(70-79)'
-                WHEN grade >= 80 AND grade < 90 THEN '良好(80-89)'
+                WHEN grade &lt; 60 THEN '不及格(0-59)'
+                WHEN grade &gt;= 60 AND grade &lt; 70 THEN '及格(60-69)'
+                WHEN grade &gt;= 70 AND grade &lt; 80 THEN '中等(70-79)'
+                WHEN grade &gt;= 80 AND grade &lt; 90 THEN '良好(80-89)'
                 ELSE '优秀(90-100)'
             END AS gradeRange,
             COUNT(*) AS count,
@@ -65,7 +65,7 @@
             ROUND(AVG(e.grade), 2) AS averageGrade,
             MAX(e.grade) AS maxGrade,
             MIN(e.grade) AS minGrade,
-            ROUND(SUM(CASE WHEN e.grade >= 60 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS passRate
+            ROUND(SUM(CASE WHEN e.grade &gt;= 60 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS passRate
         FROM
             course c
         LEFT JOIN
