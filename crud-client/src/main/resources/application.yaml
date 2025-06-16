@@ -25,8 +25,8 @@ feign:
   client:
     config:
       default:
-        connectTimeout: 3000 # 3秒连接超时
-        readTimeout: 5000 # 5秒读取超时
+        connectTimeout: 3000
+        readTimeout: 5000
 
 resilience4j:
   circuitbreaker:
@@ -40,4 +40,4 @@ resilience4j:
   timelimiter:
     instances:
       fallbackCB:
-        timeoutDuration: 5s # 设置超时时间为 5 秒
+        timeoutDuration: 5s

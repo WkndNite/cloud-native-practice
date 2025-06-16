@@ -35,7 +35,8 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public void updateStudent(@PathVariable("id") int studentId, @RequestBody Student student) {
-        student.setStudentId(studentId);
+        // 修改此处
+        student.setStudentId(Integer.valueOf(studentId));
         studentService.updateStudent(student);
     }
 

@@ -7,7 +7,6 @@
             "request": "launch",
             "mainClass": "com.example.crud.CRUDClientApplication",
             "projectName": "crud-client",
-            "preLaunchTask": "maven-crud-client"
         },
         {
             "type": "java",
@@ -16,7 +15,6 @@
             "mainClass": "com.example.crud.CRUDServiceApplication",
             "projectName": "crud-service",
             "vmArgs": "-Dserver.port=8010",
-            "preLaunchTask": "maven-crud-service"
         },
         {
             "type": "java",
@@ -25,7 +23,6 @@
             "mainClass": "com.example.crud.CRUDServiceApplication",
             "projectName": "crud-service",
             "vmArgs": "-Dserver.port=8011",
-            "preLaunchTask": "maven-crud-service"
         },
         {
             "type": "java",
@@ -33,7 +30,6 @@
             "request": "launch",
             "mainClass": "com.example.eureka.EurekaServiceApplication",
             "projectName": "com.example-eureka-service",
-            "preLaunchTask": "maven-eureka-service"
         },
         {
             "type": "java",
@@ -41,7 +37,6 @@
             "request": "launch",
             "mainClass": "com.example.gateway.GatewayServiceApplication",
             "projectName": "gateway",
-            "preLaunchTask": "maven-gateway"
         },
         {
             "type": "java",
@@ -49,7 +44,6 @@
             "request": "launch",
             "mainClass": "com.example.ConfigServerApplication",
             "projectName": "config",
-            "preLaunchTask": "maven-config"
         }
     ]
 }

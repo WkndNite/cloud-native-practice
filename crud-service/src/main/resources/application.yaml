@@ -1,17 +1,18 @@
 spring:
   application:
     name: crud-service
+
   datasource:
-    url: jdbc:mysql://localhost:3306/cloud_student_ms?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/cloud_student_ms?characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-  mybatis:
-    mapper-locations: classpath:mapper/*.xml
-    type-aliases-package: com.example.crud.model
-    configuration:
-      map-underscore-to-camel-case: true
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.crud.model
+  configuration:
+    map-underscore-to-camel-case: true
 
 server:
   port: 8010
@@ -19,9 +20,10 @@ server:
 eureka:
   instance:
     prefer-ip-address: true
-
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8888/eureka
+      defaultZone: http://localhost:8761/eureka/
