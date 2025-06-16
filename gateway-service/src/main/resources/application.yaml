@@ -1,0 +1,30 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    config:
+      enabled: false # 禁用从 config-server 拉取配置
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: crud-client
+          uri: lb://crud-client
+          filters:
+            - StripPrefix=1
+          predicates:
+            - Path=/crud/**
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8888/eureka
