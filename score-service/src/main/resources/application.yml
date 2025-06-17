@@ -1,0 +1,36 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: score-service
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/cloud_student_ms?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 12345678
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.score.model
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+  instance:
+    prefer-ip-address: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      scoreService:
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED 
