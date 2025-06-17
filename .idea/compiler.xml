@@ -10,6 +10,7 @@
         <module name="eureka-service" />
         <module name="auth-client" />
         <module name="auth-service" />
+        <module name="untitled" />
         <module name="crud-client" />
         <module name="crud-service" />
         <module name="config" />
