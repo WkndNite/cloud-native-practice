@@ -1,11 +1,11 @@
-package com.example.scoreclient.controller;
+package com.example.score.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import com.example.scoreclient.model.Score;
-import com.example.scoreclient.model.ScoreReport;
-import com.example.scoreclient.client.ScoreClient;
+import com.example.score.model.Score;
+import com.example.score.model.ScoreReport;
+import com.example.score.client.ScoreClient;
 
 @RestController
 @RequestMapping("/api/scores")
