@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.stats.mapper.StatsMapper">
+    <!-- 获取成绩分布统计 -->
+    <select id="getGradeDistribution" resultType="com.example.stats.model.GradeDistribution">
+        SELECT
+            CASE
+                WHEN grade &lt; 60 THEN '不及格(0-59)'
+                WHEN grade &gt;= 60 AND grade &lt; 70 THEN '及格(60-69)'
+                WHEN grade &gt;= 70 AND grade &lt; 80 THEN '中等(70-79)'
+                WHEN grade &gt;= 80 AND grade &lt; 90 THEN '良好(80-89)'
+                ELSE '优秀(90-100)'
+            END AS gradeRange,
+            COUNT(*) AS count,
+            ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM enrollment), 2) AS percentage
+        FROM
+            enrollment
+        GROUP BY
+            gradeRange
+        ORDER BY
+            CASE gradeRange
+                WHEN '不及格(0-59)' THEN 1
+                WHEN '及格(60-69)' THEN 2
+                WHEN '中等(70-79)' THEN 3
+                WHEN '良好(80-89)' THEN 4
+                WHEN '优秀(90-100)' THEN 5
+            END
+    </select>
+
+    <!-- 获取指定课程的成绩分布 -->
+    <select id="getCourseGradeDistribution" parameterType="int" resultType="com.example.stats.model.GradeDistribution">
+        SELECT
+            CASE
+                WHEN grade &lt; 60 THEN '不及格(0-59)'
+                WHEN grade &gt;= 60 AND grade &lt; 70 THEN '及格(60-69)'
+                WHEN grade &gt;= 70 AND grade &lt; 80 THEN '中等(70-79)'
+                WHEN grade &gt;= 80 AND grade &lt; 90 THEN '良好(80-89)'
+                ELSE '优秀(90-100)'
+            END AS gradeRange,
+            COUNT(*) AS count,
+            ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM enrollment WHERE course_id = #{courseId}), 2) AS percentage
+        FROM
+            enrollment
+        WHERE
+            course_id = #{courseId}
+        GROUP BY
+            gradeRange
+        ORDER BY
+            CASE gradeRange
+                WHEN '不及格(0-59)' THEN 1
+                WHEN '及格(60-69)' THEN 2
+                WHEN '中等(70-79)' THEN 3
+                WHEN '良好(80-89)' THEN 4
+                WHEN '优秀(90-100)' THEN 5
+            END
+    </select>
+
+    <!-- 获取所有课程的选课和成绩统计 -->
+    <select id="getCourseEnrollmentStats" resultType="com.example.stats.model.CourseEnrollmentStats">
+        SELECT
+            c.course_id AS courseId,
+            c.course_name AS courseName,
+            COUNT(e.student_id) AS studentCount,
+            ROUND(AVG(e.grade), 2) AS averageGrade,
+            MAX(e.grade) AS maxGrade,
+            MIN(e.grade) AS minGrade,
+            ROUND(SUM(CASE WHEN e.grade &gt;= 60 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS passRate
+        FROM
+            course c
+        LEFT JOIN
+            enrollment e ON c.course_id = e.course_id
+        GROUP BY
+            c.course_id, c.course_name
+        ORDER BY
+            c.course_id
+    </select>
+
+    <!-- 获取学生的学习表现统计 -->
+    <select id="getStudentPerformance" resultType="com.example.stats.model.StudentPerformance">
+        SELECT
+            s.student_id AS studentId,
+            s.name AS studentName,
+            COUNT(e.course_id) AS courseCount,
+            ROUND(AVG(e.grade), 2) AS averageGrade,
+            ROUND(SUM(c.credit), 2) AS totalCredits,
+            ROUND(SUM(e.grade * c.credit) / SUM(c.credit) / 20, 2) AS gpa
+        FROM
+            student s
+        LEFT JOIN
+            enrollment e ON s.student_id = e.student_id
+        LEFT JOIN
+            course c ON e.course_id = c.course_id
+        GROUP BY
+            s.student_id, s.name
+        ORDER BY
+            gpa DESC
+    </select>
+
+    <!-- 获取指定学生的学习表现 -->
+    <select id="getStudentPerformanceById" parameterType="int" resultType="com.example.stats.model.StudentPerformance">
+        SELECT
+            s.student_id AS studentId,
+            s.name AS studentName,
+            COUNT(e.course_id) AS courseCount,
+            ROUND(AVG(e.grade), 2) AS averageGrade,
+            ROUND(SUM(c.credit), 2) AS totalCredits,
+            ROUND(SUM(e.grade * c.credit) / SUM(c.credit) / 20, 2) AS gpa
+        FROM
+            student s
+        LEFT JOIN
+            enrollment e ON s.student_id = e.student_id
+        LEFT JOIN
+            course c ON e.course_id = c.course_id
+        WHERE
+            s.student_id = #{studentId}
+        GROUP BY
+            s.student_id, s.name
+    </select>
+
+    <!-- 获取各专业平均成绩 -->
+    <select id="getMajorAverageGrades" resultType="java.util.Map">
+        SELECT
+            s.major,
+            ROUND(AVG(e.grade), 2) AS averageGrade,
+            COUNT(DISTINCT s.student_id) AS studentCount
+        FROM
+            student s
+        JOIN
+            enrollment e ON s.student_id = e.student_id
+        GROUP BY
+            s.major
+        ORDER BY
+            averageGrade DESC
+    </select>
+
+    <!-- 获取各年级平均成绩 -->
+    <select id="getGradeLevelAverageGrades" resultType="java.util.Map">
+        SELECT
+            s.grade_level AS gradeLevel,
+            ROUND(AVG(e.grade), 2) AS averageGrade,
+            COUNT(DISTINCT s.student_id) AS studentCount
+        FROM
+            student s
+        JOIN
+            enrollment e ON s.student_id = e.student_id
+        GROUP BY
+            s.grade_level
+        ORDER BY
+            CASE s.grade_level
+                WHEN '大一' THEN 1
+                WHEN '大二' THEN 2
+                WHEN '大三' THEN 3
+                WHEN '大四' THEN 4
+            END
+    </select>
+</mapper>

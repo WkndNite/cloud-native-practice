@@ -1,21 +1,21 @@
 spring:
   application:
-    name: crud-service
+    name: stats-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/cloud_student_ms?characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://mysql.default:3306/cloud_student_ms?characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:com/example/stats/mapper/*.xml
   type-aliases-package: com.example.crud.model
   configuration:
     map-underscore-to-camel-case: true
 
 server:
-  port: 8010
+  port: 8030
 
 eureka:
   instance:
@@ -26,4 +26,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-service.stockmgr.svc.cluster.local:8888/eureka
