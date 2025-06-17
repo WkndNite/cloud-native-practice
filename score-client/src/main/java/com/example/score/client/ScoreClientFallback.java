@@ -1,10 +1,10 @@
-package com.example.scoreclient.client;
+package com.example.score.client;
 
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.scoreclient.model.Score;
-import com.example.scoreclient.model.ScoreReport;
+import com.example.score.model.Score;
+import com.example.score.model.ScoreReport;
 
 @Component
 public class ScoreClientFallback implements ScoreClient {

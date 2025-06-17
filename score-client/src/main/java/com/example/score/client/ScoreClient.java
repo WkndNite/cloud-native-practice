@@ -1,10 +1,10 @@
-package com.example.scoreclient.client;
+package com.example.score.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import com.example.scoreclient.model.Score;
-import com.example.scoreclient.model.ScoreReport;
+import com.example.score.model.Score;
+import com.example.score.model.ScoreReport;
 
 @FeignClient(name = "score-service", fallback = ScoreClientFallback.class)
 public interface ScoreClient {
