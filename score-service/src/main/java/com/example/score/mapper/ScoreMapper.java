@@ -12,7 +12,7 @@ public interface ScoreMapper {
     
     List<Score> findByStudentId(Integer studentId);
     
-    List<Score> findByCourseName(String courseName);
+    List<Score> findByCourseId(Integer courseId);
     
     void insert(Score score);
     
@@ -22,5 +22,9 @@ public interface ScoreMapper {
     
     Double getAverageScoreByStudentId(Integer studentId);
     
-    Double getAverageScoreByCourseName(String courseName);
+    Double getAverageScoreByCourseId(Integer courseId);
+    
+    List<Score> findStudentScoresWithDetails(Integer studentId);
+    
+    List<Score> findCourseScoresWithDetails(Integer courseId);
 } 

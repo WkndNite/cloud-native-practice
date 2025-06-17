@@ -3,53 +3,89 @@
 <mapper namespace="com.example.score.mapper.ScoreMapper">
     
     <resultMap id="scoreMap" type="com.example.score.model.Score">
-        <id property="id" column="id"/>
+        <id property="enrollmentId" column="enrollment_id"/>
         <result property="studentId" column="student_id"/>
-        <result property="courseName" column="course_name"/>
-        <result property="score" column="score"/>
+        <result property="courseId" column="course_id"/>
+        <result property="grade" column="grade"/>
+        <result property="enrolledAt" column="enrolled_at"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+        <result property="studentName" column="student_name"/>
+        <result property="courseName" column="course_name"/>
+        <result property="courseType" column="course_type"/>
+        <result property="credit" column="credit"/>
     </resultMap>
 
     <select id="findAll" resultMap="scoreMap">
-        SELECT * FROM score
+        SELECT e.*, s.name as student_name, c.course_name, c.course_type, c.credit
+        FROM enrollment e
+        JOIN student s ON e.student_id = s.student_id
+        JOIN course c ON e.course_id = c.course_id
     </select>
 
     <select id="findById" resultMap="scoreMap">
-        SELECT * FROM score WHERE id = #{id}
+        SELECT e.*, s.name as student_name, c.course_name, c.course_type, c.credit
+        FROM enrollment e
+        JOIN student s ON e.student_id = s.student_id
+        JOIN course c ON e.course_id = c.course_id
+        WHERE e.enrollment_id = #{id}
     </select>
 
     <select id="findByStudentId" resultMap="scoreMap">
-        SELECT * FROM score WHERE student_id = #{studentId}
+        SELECT e.*, s.name as student_name, c.course_name, c.course_type, c.credit
+        FROM enrollment e
+        JOIN student s ON e.student_id = s.student_id
+        JOIN course c ON e.course_id = c.course_id
+        WHERE e.student_id = #{studentId}
     </select>
 
-    <select id="findByCourseName" resultMap="scoreMap">
-        SELECT * FROM score WHERE course_name = #{courseName}
+    <select id="findByCourseId" resultMap="scoreMap">
+        SELECT e.*, s.name as student_name, c.course_name, c.course_type, c.credit
+        FROM enrollment e
+        JOIN student s ON e.student_id = s.student_id
+        JOIN course c ON e.course_id = c.course_id
+        WHERE e.course_id = #{courseId}
     </select>
 
-    <insert id="insert" parameterType="com.example.score.model.Score" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO score (student_id, course_name, score, created_at, updated_at)
-        VALUES (#{studentId}, #{courseName}, #{score}, NOW(), NOW())
+    <insert id="insert" parameterType="com.example.score.model.Score">
+        INSERT INTO enrollment (student_id, course_id, grade, enrolled_at, created_at, updated_at)
+        VALUES (#{studentId}, #{courseId}, #{grade}, NOW(), NOW(), NOW())
     </insert>
 
     <update id="update" parameterType="com.example.score.model.Score">
-        UPDATE score
-        SET student_id = #{studentId},
-            course_name = #{courseName},
-            score = #{score},
+        UPDATE enrollment
+        SET grade = #{grade},
             updated_at = NOW()
-        WHERE id = #{id}
+        WHERE enrollment_id = #{enrollmentId}
     </update>
 
     <delete id="deleteById">
-        DELETE FROM score WHERE id = #{id}
+        DELETE FROM enrollment WHERE enrollment_id = #{id}
     </delete>
 
     <select id="getAverageScoreByStudentId" resultType="java.lang.Double">
-        SELECT AVG(score) FROM score WHERE student_id = #{studentId}
+        SELECT AVG(grade) FROM enrollment WHERE student_id = #{studentId}
     </select>
 
-    <select id="getAverageScoreByCourseName" resultType="java.lang.Double">
-        SELECT AVG(score) FROM score WHERE course_name = #{courseName}
+    <select id="getAverageScoreByCourseId" resultType="java.lang.Double">
+        SELECT AVG(grade) FROM enrollment WHERE course_id = #{courseId}
+    </select>
+
+    <select id="findStudentScoresWithDetails" resultMap="scoreMap">
+        SELECT e.*, s.name as student_name, c.course_name, c.course_type, c.credit
+        FROM enrollment e
+        JOIN student s ON e.student_id = s.student_id
+        JOIN course c ON e.course_id = c.course_id
+        WHERE e.student_id = #{studentId}
+        ORDER BY c.course_name
+    </select>
+
+    <select id="findCourseScoresWithDetails" resultMap="scoreMap">
+        SELECT e.*, s.name as student_name, c.course_name, c.course_type, c.credit
+        FROM enrollment e
+        JOIN student s ON e.student_id = s.student_id
+        JOIN course c ON e.course_id = c.course_id
+        WHERE e.course_id = #{courseId}
+        ORDER BY s.name
     </select>
 </mapper> 

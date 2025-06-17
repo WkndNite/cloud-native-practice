@@ -6,10 +6,17 @@ import lombok.Data;
 
 @Data
 public class Score {
-    private Integer id;
+    private Integer enrollmentId;
     private Integer studentId;
-    private String courseName;
-    private Double score;
+    private Integer courseId;
+    private Double grade;
+    private LocalDateTime enrolledAt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    
+    // 关联查询的额外字段
+    private String studentName;
+    private String courseName;
+    private String courseType;
+    private Double credit;
 } 

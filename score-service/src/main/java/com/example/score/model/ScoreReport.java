@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ScoreReport {
     private Integer studentId;
+    private String studentName;
     private List<Score> scores;
     private Double averageScore;
     private Double totalScore;

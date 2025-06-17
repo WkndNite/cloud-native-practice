@@ -26,8 +26,8 @@ public class ScoreService {
         return scoreMapper.findByStudentId(studentId);
     }
 
-    public List<Score> findByCourseName(String courseName) {
-        return scoreMapper.findByCourseName(courseName);
+    public List<Score> findByCourseId(Integer courseId) {
+        return scoreMapper.findByCourseId(courseId);
     }
 
     @Transactional
@@ -49,23 +49,24 @@ public class ScoreService {
         return scoreMapper.getAverageScoreByStudentId(studentId);
     }
 
-    public Double getAverageScoreByCourseName(String courseName) {
-        return scoreMapper.getAverageScoreByCourseName(courseName);
+    public Double getAverageScoreByCourseId(Integer courseId) {
+        return scoreMapper.getAverageScoreByCourseId(courseId);
     }
 
     public ScoreReport generateScoreReport(Integer studentId) {
-        List<Score> scores = findByStudentId(studentId);
+        List<Score> scores = scoreMapper.findStudentScoresWithDetails(studentId);
         if (scores.isEmpty()) {
             return null;
         }
 
         ScoreReport report = new ScoreReport();
         report.setStudentId(studentId);
+        report.setStudentName(scores.get(0).getStudentName());
         report.setScores(scores);
         report.setCourseCount(scores.size());
 
         DoubleSummaryStatistics stats = scores.stream()
-            .mapToDouble(Score::getScore)
+            .mapToDouble(Score::getGrade)
             .summaryStatistics();
 
         report.setAverageScore(stats.getAverage());

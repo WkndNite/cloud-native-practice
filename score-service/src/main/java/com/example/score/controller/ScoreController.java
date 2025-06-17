@@ -28,9 +28,9 @@ public class ScoreController {
         return scoreService.findByStudentId(studentId);
     }
 
-    @GetMapping("/course/{courseName}")
-    public List<Score> getScoresByCourse(@PathVariable String courseName) {
-        return scoreService.findByCourseName(courseName);
+    @GetMapping("/course/{courseId}")
+    public List<Score> getScoresByCourse(@PathVariable Integer courseId) {
+        return scoreService.findByCourseId(courseId);
     }
 
     @PostMapping
@@ -40,7 +40,7 @@ public class ScoreController {
 
     @PutMapping("/{id}")
     public void updateScore(@PathVariable Integer id, @RequestBody Score score) {
-        score.setId(id);
+        score.setEnrollmentId(id);
         scoreService.updateScore(score);
     }
 
@@ -54,9 +54,9 @@ public class ScoreController {
         return scoreService.getAverageScoreByStudentId(studentId);
     }
 
-    @GetMapping("/course/{courseName}/average")
-    public Double getAverageScoreByCourse(@PathVariable String courseName) {
-        return scoreService.getAverageScoreByCourseName(courseName);
+    @GetMapping("/course/{courseId}/average")
+    public Double getAverageScoreByCourse(@PathVariable Integer courseId) {
+        return scoreService.getAverageScoreByCourseId(courseId);
     }
 
     @GetMapping("/student/{studentId}/report")
