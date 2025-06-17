@@ -10,12 +10,14 @@
         <module name="eureka-service" />
         <module name="auth-client" />
         <module name="auth-service" />
-        <module name="untitled" />
         <module name="crud-client" />
         <module name="crud-service" />
         <module name="config" />
         <module name="gateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="untitled" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
