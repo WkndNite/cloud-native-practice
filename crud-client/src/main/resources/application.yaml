@@ -5,28 +5,20 @@ spring:
 server:
   port: 8020
 
-ribbon:
-  eureka:
-    enable: true
-
 eureka:
   instance:
     prefer-ip-address: true
 
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    initial-instance-info-replication-interval-seconds: 10
-    registry-fetch-interval-seconds: 5
-    service-url:
-      defaultZone: http://localhost:8888/eureka
+ribbon:
+  eureka:
+    enable: true
 
 feign:
   client:
     config:
       default:
-        connectTimeout: 3000 # 3秒连接超时
-        readTimeout: 5000 # 5秒读取超时
+        connectTimeout: 3000
+        readTimeout: 5000
 
 resilience4j:
   circuitbreaker:
@@ -40,4 +32,4 @@ resilience4j:
   timelimiter:
     instances:
       fallbackCB:
-        timeoutDuration: 5s # 设置超时时间为 5 秒
+        timeoutDuration: 5s
