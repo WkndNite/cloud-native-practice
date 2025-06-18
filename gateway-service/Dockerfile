@@ -1,5 +1,5 @@
 # 使用阿里云提供的完整 JDK 镜像
-FROM azul/zulu-openjdk-alpine:17-jre
+FROM crpi-xxrtggj57h8kwbz2.cn-hangzhou.personal.cr.aliyuncs.com/cloud-native-practice/zulu-jdk:17
 
 LABEL maintainer="me"
 
