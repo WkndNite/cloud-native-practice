@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud-client
+  namespace: stockmgr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crud-client
+  template:
+    metadata:
+      labels:
+        app: crud-client
+    spec:
+      containers:
+        - name: crud-client
+          image: crpi-xxrtggj57h8kwbz2.cn-hangzhou.personal.cr.aliyuncs.com/cloud-native-practice/crud-client:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8020
+              protocol: TCP
+          env:
+            - name: JAVA_OPTS
+              value: "-Xmx1g"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "k8s"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          readinessProbe:
+            tcpSocket:
+              port: 8020
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8020
+            initialDelaySeconds: 60
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crud-client
+  namespace: stockmgr
+spec:
+  selector:
+    app: crud-client
+  ports:
+    - name: http
+      port: 8020
+      targetPort: 8020
+  type: ClusterIP
