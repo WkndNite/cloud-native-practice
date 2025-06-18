@@ -1,0 +1,4 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server.default.svc.cluster.local:8888/eureka

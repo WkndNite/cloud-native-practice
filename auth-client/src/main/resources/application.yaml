@@ -3,7 +3,7 @@ spring:
     name: auth-client
 
 server:
-  port: 8030
+  port: 8086
 
 ribbon:
   eureka:
