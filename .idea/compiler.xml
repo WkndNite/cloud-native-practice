@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eureka-service" />
+        <module name="auth-client" />
+        <module name="auth-service" />
+        <module name="stats-service" />
+        <module name="crud-client" />
+        <module name="crud-service" />
+        <module name="config" />
+        <module name="gateway" />
+        <module name="score-service" />
+        <module name="stats-client" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
