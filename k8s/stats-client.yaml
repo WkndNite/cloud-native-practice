@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stats-client
+  namespace: stockmgr
+  labels:
+    app: stats-client
+spec:
+  type: ClusterIP
+  selector:
+    app: stats-client
+  ports:
+    - name: http
+      port: 8040
+      targetPort: 8040
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats-client
+  namespace: stockmgr
+  labels:
+    app: stats-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stats-client
+  template:
+    metadata:
+      labels:
+        app: stats-client
+    spec:
+      terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+        - name: registry-pull-secret
+      containers:
+        - name: stats-client
+          image: crpi-xxrtggj57h8kwbz2.cn-hangzhou.personal.cr.aliyuncs.com/cloud-native-practice/stats-client:2.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8040
+              protocol: TCP
+          env:
+            - name: JAVA_OPTS
+              value: "-Xmx1g"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "k8s"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          readinessProbe:
+            tcpSocket:
+              port: 8040
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8040
+            initialDelaySeconds: 60
+            periodSeconds: 10

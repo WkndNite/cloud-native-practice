@@ -12,14 +12,15 @@
     <module>eureka-service</module>
     <module>crud-service</module>
     <module>crud-client</module>
-    <!-- <module>stats-service</module>
+    <module>stats-service</module>
     <module>stats-client</module>
-    <module>auth-service</module>
-    <module>auth-client</module>
-    <module>score-service</module>
-    <module>score-client</module> -->
+    <!-- <module>auth-service</module> -->
+    <!-- <module>auth-client</module> -->
+    <!-- <module>score-service</module> -->
+    <!-- <module>score-client</module> -->
     <module>gateway-service</module>
     <module>config-service</module>
+
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: stats-client
+
+server:
+  port: 8040
+
+ribbon:
+  eureka:
+    enable: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    initial-instance-info-replication-interval-seconds: 10
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://localhost:8888/eureka
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 3000 # 3秒连接超时
+        readTimeout: 5000 # 5秒读取超时
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      statsCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+  timelimiter:
+    instances:
+      statsCB:
+        timeoutDuration: 5s # 设置超时时间为 5 秒

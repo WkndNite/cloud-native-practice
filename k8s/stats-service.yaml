@@ -1,0 +1,60 @@
+kind: List
+apiVersion: v1
+items:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: stats-service
+      namespace: stockmgr
+    spec:
+      type: ClusterIP
+      selector:
+        app: stats-service
+      ports:
+        - name: http
+          port: 8030
+          targetPort: 8030
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: stats-service
+      namespace: stockmgr
+    spec:
+      replicas: 2
+      selector:
+        matchLabels:
+          app: stats-service
+      template:
+        metadata:
+          labels:
+            app: stats-service
+        spec:
+          imagePullSecrets:
+            - name: registry-pull-secret
+          containers:
+            - name: stats-service
+              image: crpi-xxrtggj57h8kwbz2.cn-hangzhou.personal.cr.aliyuncs.com/cloud-native-practice/stats-service:1.0
+              imagePullPolicy: IfNotPresent
+              ports:
+                - protocol: TCP
+                  containerPort: 8030
+              env:
+                - name: JAVA_OPTS
+                  value: "-Xmx1g"
+              resources:
+                requests:
+                  cpu: 0.5
+                  memory: 256Mi
+                limits:
+                  cpu: 1
+                  memory: 1Gi
+              readinessProbe:
+                tcpSocket:
+                  port: 8030
+                initialDelaySeconds: 60
+                periodSeconds: 10
+              livenessProbe:
+                tcpSocket:
+                  port: 8030
+                initialDelaySeconds: 60
+                periodSeconds: 10
