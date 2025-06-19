@@ -14,8 +14,8 @@
     <module>crud-client</module>
     <module>stats-service</module>
     <module>stats-client</module>
-    <!-- <module>auth-service</module> -->
-    <!-- <module>auth-client</module> -->
+    <module>auth-service</module>
+    <module>auth-client</module>
     <module>score-service</module>
     <module>score-client</module>
     <module>gateway-service</module>
