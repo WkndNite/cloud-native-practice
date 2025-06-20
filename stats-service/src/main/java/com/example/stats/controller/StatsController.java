@@ -4,7 +4,6 @@ import com.example.stats.model.CourseEnrollmentStats;
 import com.example.stats.model.GradeDistribution;
 import com.example.stats.model.StudentPerformance;
 import com.example.stats.service.StatsService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
